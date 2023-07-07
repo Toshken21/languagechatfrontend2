@@ -2,7 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import SpeechToTextComponent from './dictaphone/dictaphone';
 import ResponseViewer from './responseViewer/responseViewer';
 import PreviousResponse from './previousResponses/previousResponse';
+import ReactGA from 'react-ga';
 
+ReactGA.initialize('G-TEP59K5QXD'); // replace 'UA-000000-01' with your actual Tracking ID
 
 function DemoPage() {
 
@@ -15,6 +17,18 @@ function DemoPage() {
   const [skillLevelSetting, setSkillLevelSetting] = useState("");
   const [language, setLanguage] = useState("nb-NO");
   const [voice, setVoice] = useState("nb-NO-Standard-A");
+  const [inAppBrowser, setInAppBrowser] = useState(false);
+
+  useEffect(() => {
+    // Record a pageview for the given page
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []); 
+
+  useEffect(() => {
+    const userAgent = window.navigator.userAgent || window.navigator.vendor || window.opera;
+    setInAppBrowser(/FBAV|FBAN/i.test(userAgent));
+  }, []);
+
 
   useEffect(() => {
     switch(language) {
@@ -110,6 +124,16 @@ function DemoPage() {
     }
 
   }, [gptResponse])
+
+  if(inAppBrowser) {
+    return(
+      <div>
+          <h1>Please open this page in Chrome</h1>
+          <p>1. Tap the 'Share' button at the bottom of your screen (the box with an arrow pointing upwards).</p>
+          <p>2. Scroll to the right in the bottom row of black and white icons until you find 'Chrome' and tap it.</p>
+      </div>
+    )
+  }
 
   return(
     <div>

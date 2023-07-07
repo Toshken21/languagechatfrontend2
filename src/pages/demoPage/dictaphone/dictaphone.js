@@ -53,7 +53,7 @@ const SpeechToTextComponent = (props) => {
     return (
         <div>
             
-            <button onClick={startListening}>Start</button>
+            <button onClick={startListening}>Speak</button>
             <button onClick={stopListening}>Stop</button>
             <button onClick={resetTranscript}>Reset</button>
             <p>Listening: {listening ? 'Yes' : 'No'}</p>
