@@ -52,7 +52,7 @@ function DemoPage() {
 
   const handleGptQuery = async () => {
     console.log("instance of query start");
-    const response = await fetch("http://localhost:4000/gptPrompt/userResponse/add", {
+    const response = await fetch("https://languagechatbackend-f098582e0fd8.herokuapp.com/gptPrompt/userResponse/add", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',

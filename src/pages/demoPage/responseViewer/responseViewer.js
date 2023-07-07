@@ -17,7 +17,7 @@ const ResponseViewer = (props) => {
 
   useEffect(() => {
     if (gptResponse) {
-      fetch(`http://localhost:4000/promptVoice/gptPromptVoice/googleSpeech?text=${encodeURIComponent(gptResponse)}&lang=${encodeURIComponent(voiceLanguage)}`)
+      fetch(`https://languagechatbackend-f098582e0fd8.herokuapp.com/promptVoice/gptPromptVoice/googleSpeech?text=${encodeURIComponent(gptResponse)}&lang=${encodeURIComponent(voiceLanguage)}`)
         .then(response => response.blob())
         .then(blob => {
           audio.src = URL.createObjectURL(blob);
