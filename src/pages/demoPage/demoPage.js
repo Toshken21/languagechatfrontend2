@@ -129,7 +129,7 @@ function DemoPage() {
     return(
       <div>
           <h1>Please open this page in Chrome</h1>
-          <p>1. Clcik the three dots icon on the top right).</p>
+          <p>1. Click the three dots icon on the top right.</p>
           <p>2. Click open in Chrome.</p>
       </div>
     )
