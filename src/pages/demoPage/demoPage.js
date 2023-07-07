@@ -129,8 +129,8 @@ function DemoPage() {
     return(
       <div>
           <h1>Please open this page in Chrome</h1>
-          <p>1. Tap the 'Share' button at the bottom of your screen (the box with an arrow pointing upwards).</p>
-          <p>2. Scroll to the right in the bottom row of black and white icons until you find 'Chrome' and tap it.</p>
+          <p>1. Clcik the three dots icon on the top right).</p>
+          <p>2. Click open in Chrome.</p>
       </div>
     )
   }
