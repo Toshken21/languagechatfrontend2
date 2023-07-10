@@ -3,6 +3,7 @@ import SpeechToTextComponent from './dictaphone/dictaphone';
 import ResponseViewer from './responseViewer/responseViewer';
 import PreviousResponse from './previousResponses/previousResponse';
 import ReactGA from 'react-ga';
+import DemoCSS from "./demoPage.module.css";
 
 ReactGA.initialize('G-TEP59K5QXD'); // replace 'UA-000000-01' with your actual Tracking ID
 
@@ -139,11 +140,11 @@ function DemoPage() {
 
   return(
     <div>
+      <div className={DemoCSS["chatbot-holder"]}>
 
-
-        <form>
-            <label>What language do you want to talk in</label>
-            <select id="language" name="language" onChange={handleLanguageSettings}>
+        <form className={DemoCSS["chatbot-form"]}>
+            <label>Select language:</label>
+            <select id="language" name="language" onChange={handleLanguageSettings} className={DemoCSS["language-select"]}>
               <option value="nb-NO">Norwegian</option>
               <option value="en-US">English</option>
               <option value="fr-FR">French</option>
@@ -152,13 +153,16 @@ function DemoPage() {
               <option value="ko-KR">Korean</option>
               
             </select>
-            <br/>
+
+            
+            {/*   
             <label>Set up conversation setting</label>
             <input type='text' onChange={handleConversationSetting}/>
             <br/>
             <label>Who is your talking partner </label>
             <input type="text" onChange={handleAssistantSetting}/>
             <br/>
+  `*/}         
             <label>What is your skill Level</label>
             <select id="skill-level" name="skill-level" onChange={handleSkillLevelSetting}>
                 <option value="A1">A1</option>
@@ -170,9 +174,12 @@ function DemoPage() {
             </select>
             
         </form>
-        {  previousResponsesData.map((response, index) => (
-    <PreviousResponse key={index} data={response} />
-    ))} 
+        <div className={DemoCSS["previous-responses-holder"]}>
+          {  previousResponsesData.map((response, index) => (
+      <PreviousResponse key={index} data={response} />
+      ))} 
+        </div>
+
         <ResponseViewer gptResponse={gptResponse} handlePreviousResponse={handlePreviousResponse} language={language}/>
         <SpeechToTextComponent handleUserPrompt={handleUserPrompt} 
         skillLevel={skillLevelSetting}
@@ -183,6 +190,7 @@ function DemoPage() {
         
 
     </div>
+  </div>
   )
 }
 

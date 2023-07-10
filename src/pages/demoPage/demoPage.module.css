@@ -1,0 +1,20 @@
+.chatbot-holder {
+    margin-top: 10em;
+    margin-left: 25em;
+    width: 40em;
+    border-radius: 1.5em;
+    height: 30em;
+    border: 1px solid black;
+}
+
+.chatbot-form {
+    margin-left: 6em;
+}
+
+.language-select {
+    margin-right: 1em;
+}
+
+.previous-response-holder {
+    overflow: scroll;
+}

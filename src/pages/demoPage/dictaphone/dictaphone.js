@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import SpeechCSS from "./dictaphone.module.css";
 
 const SpeechToTextComponent = (props) => {
 
@@ -15,6 +16,12 @@ const SpeechToTextComponent = (props) => {
         }
 
     }, [isRecording, userTranscript]);
+
+    useEffect(() => {
+        if(!isRecording){
+            setUserTranscript("");
+        }
+    }, [isRecording])
     const {
         transcript,
         listening,
@@ -26,19 +33,15 @@ const SpeechToTextComponent = (props) => {
         return <p>Sorry, your browser does not support speech recognition.</p>;
     }
 
-
-
-
-
-
     const startListening = () =>{
         if(userTranscript) {
             const response = [userType, userTranscript];
             props.handlePreviousResponse(response);
             setUserTranscript("");
-            resetTranscript();
+            
 
         }
+        resetTranscript();
         setIsRecording(true);
         SpeechRecognition.startListening({ continuous: true, language: props.language });
     }  
@@ -46,20 +49,28 @@ const SpeechToTextComponent = (props) => {
         setIsRecording(false);
         SpeechRecognition.stopListening();
         setUserTranscript(transcript);
+        
 
     }
 
+    const handleButtonClick = () => {
+        if (isRecording) {
+            stopListening();
+        } else {
+            startListening();
+        }
+    }
 
     return (
         <div>
-            
-            <button onClick={startListening}>Speak</button>
-            <button onClick={stopListening}>Stop</button>
+
+            <p>Recording: {listening ? 'Yes' : 'No'}</p>
+
+            <p>{listening ? transcript : ""}</p>
+            <button onClick={handleButtonClick}>{isRecording ? "Stop" : "Speak"}</button>
             <button onClick={resetTranscript}>Reset</button>
-            <p>Listening: {listening ? 'Yes' : 'No'}</p>
-            <p>{transcript}</p>
         </div>
-        );
-    };
+    );
+};
 
 export default SpeechToTextComponent;
