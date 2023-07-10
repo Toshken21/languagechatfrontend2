@@ -19,6 +19,8 @@ function DemoPage() {
   const [voice, setVoice] = useState("nb-NO-Standard-A");
   const [inAppBrowser, setInAppBrowser] = useState(false);
 
+
+
   useEffect(() => {
     // Record a pageview for the given page
     ReactGA.pageview(window.location.pathname + window.location.search);
@@ -137,6 +139,8 @@ function DemoPage() {
 
   return(
     <div>
+
+
         <form>
             <label>What language do you want to talk in</label>
             <select id="language" name="language" onChange={handleLanguageSettings}>
