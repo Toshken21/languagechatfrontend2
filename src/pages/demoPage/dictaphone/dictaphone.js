@@ -74,7 +74,7 @@ const SpeechToTextComponent = (props) => {
             <p>Recording:</p>
 
             <p className={SpeechCSS["transcript-reader"]}>{listening ? transcript : ""}</p>
-            <button className={SpeechCSS["speech-button"]} onClick={handleButtonClick}>{isRecording ? "Stop" : MicrophoneSVG}</button>
+            <button className={SpeechCSS["speech-button"]} onClick={handleButtonClick}>{isRecording ? "Stop" : <MicrophoneSVG />}</button>
             <button  onClick={resetTranscript}>Reset</button>
         </div>
     );
