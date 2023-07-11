@@ -39,9 +39,8 @@ const ResponseViewer = (props) => {
 
   return (
     <div>
-      <h3></h3>
-      <p></p>
-      {gptResponse && <button onClick={handleOnClick}>Repeat</button>}
+
+      {/*gptResponse && <button onClick={handleOnClick}>Repeat</button>*/}
     </div>
   );
 };

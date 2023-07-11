@@ -2,6 +2,13 @@ import React, {useEffect, useState} from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import SpeechCSS from "./dictaphone.module.css";
 
+const MicrophoneSVG = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v4m-6 0a6 6 0 0012 0m-6 0H6m6 0h6" />
+    </svg>
+  );
+  
+
 const SpeechToTextComponent = (props) => {
 
     const [isRecording, setIsRecording] = useState(false);
@@ -62,13 +69,13 @@ const SpeechToTextComponent = (props) => {
     }
 
     return (
-        <div>
+        <div className={SpeechCSS["speech-holder"]}>
 
-            <p>Recording: {listening ? 'Yes' : 'No'}</p>
+            <p>Recording:</p>
 
-            <p>{listening ? transcript : ""}</p>
-            <button onClick={handleButtonClick}>{isRecording ? "Stop" : "Speak"}</button>
-            <button onClick={resetTranscript}>Reset</button>
+            <p className={SpeechCSS["transcript-reader"]}>{listening ? transcript : ""}</p>
+            <button className={SpeechCSS["speech-button"]} onClick={handleButtonClick}>{isRecording ? "Stop" : MicrophoneSVG}</button>
+            <button  onClick={resetTranscript}>Reset</button>
         </div>
     );
 };

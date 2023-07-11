@@ -1,0 +1,15 @@
+.speech-holder {
+    display: flex;
+    flex-direction: row;
+}
+
+.speech-button {
+    width: 4em;
+    height: 3em;
+    
+}
+
+.transcript-reader {
+    margin-left: 1em;
+    width: 28em;
+}
