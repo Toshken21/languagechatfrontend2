@@ -1,0 +1,45 @@
+.response {
+    width: 22em;
+    border: 1px solid green;
+    border-radius: 1em;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+
+
+.user-response {
+    background-color: #778E71;
+    color: aliceblue;
+    align-self: flex-end; /* changes to flex-end */
+    margin-right: 1em;
+    
+}
+
+.ai-response {
+    align-self: flex-start; /* add this new class for AI response */
+    margin-left: 1em;
+    
+}
+
+
+.speaker {
+    margin-top: 0;
+    width: 5em;
+    height: 0.8em;
+    padding-top: 0;
+}
+
+.voice-holder {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.response-h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+}

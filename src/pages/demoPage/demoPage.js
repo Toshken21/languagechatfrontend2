@@ -4,6 +4,9 @@ import ResponseViewer from './responseViewer/responseViewer';
 import PreviousResponse from './previousResponses/previousResponse';
 import ReactGA from 'react-ga';
 import DemoCSS from "./demoPage.module.css";
+import SpeechBubbleIcon from './icons/speechBubble';
+import QuestionIcon from './icons/supportQuestionIcon';
+import ChatSuggestion from './chatSuggestions/chatSuggestions';
 
 ReactGA.initialize('G-TEP59K5QXD'); // replace 'UA-000000-01' with your actual Tracking ID
 
@@ -12,15 +15,19 @@ function DemoPage() {
   const [recorder, setRecorder] = useState(null);
   const [userPrompt, setUserPrompt] = useState("");
   const [gptResponse, setGptResponse] = useState("");
-  const [previousResponsesData, setPreviousResponsesData] = useState([]);
+  const [previousResponsesData, setPreviousResponsesData] = useState(["hello"]);
   const [conversationSetting, setConversationSetting] = useState("");
   const [assistantSetting, setAssistantSetting] = useState("");
   const [skillLevelSetting, setSkillLevelSetting] = useState("");
   const [language, setLanguage] = useState("nb-NO");
   const [voice, setVoice] = useState("nb-NO-Standard-A");
   const [inAppBrowser, setInAppBrowser] = useState(false);
+  const [suggestionArray, setSuggestionArray] = useState([]);
+  const [secondRender, setSecondRender] = useState(false);
 
-
+  useEffect(() => {
+    setPreviousResponsesData([])
+  }, [])
 
   useEffect(() => {
     // Record a pageview for the given page
@@ -30,6 +37,7 @@ function DemoPage() {
   useEffect(() => {
     const userAgent = window.navigator.userAgent || window.navigator.vendor || window.opera;
     setInAppBrowser(/FBAV|FBAN/i.test(userAgent));
+    setSecondRender(true);
   }, []);
 
 
@@ -69,7 +77,7 @@ function DemoPage() {
 
   const handleGptQuery = async () => {
     console.log("instance of query start");
-    const response = await fetch("https://languagechatbackend-f098582e0fd8.herokuapp.com/gptPrompt/userResponse/add", {
+    const response = await fetch("https://languagechatbackend-a20ce8427269.herokuapp.com/gptPrompt/userResponse/add", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -128,6 +136,55 @@ function DemoPage() {
 
   }, [gptResponse])
 
+  //UseEffect chatSuggestion for first render
+
+  /*
+  useEffect(() => {
+
+    let responseLength = previousResponsesData.length;
+  
+    const fetchData = async () => {
+
+      if(responseLength % 2 === 0){
+        // fetch and create new suggestions
+        
+        const response = await fetch("https://languagechatbackend-76d135063e5f.herokuapp.com/gptPrompt/userSuggestions/add", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            language: language,
+            array: previousResponsesData
+          })
+        })
+        // Do something with the response if needed
+        
+        
+        const result = await response.json();
+        console.log(result.suggestionResponse);
+        const responseArray = JSON.parse(result.suggestionResponse.content);
+        console.log(responseArray);
+        if(responseArray) {
+          console.log("Resetting to zero");
+          setSuggestionArray([]);
+          console.log("This is setSuggestionArray being reset to 0", suggestionArray);
+        }
+        setSuggestionArray(() => {
+          if(responseArray){
+            return [...responseArray];
+          }
+        return [];
+      });
+        
+
+      }
+    };
+  
+    fetchData();
+  }, [previousResponsesData]);
+  */
+
   if(inAppBrowser) {
     return(
       <div>
@@ -139,7 +196,13 @@ function DemoPage() {
   }
 
   return(
-    <div>
+    <div className={DemoCSS["body-holder"]}>
+      <nav>
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
+      </nav>
       <div className={DemoCSS["chatbot-holder"]}>
 
         <form className={DemoCSS["chatbot-form"]}>
@@ -181,6 +244,8 @@ function DemoPage() {
         </div>
 
         <ResponseViewer gptResponse={gptResponse} handlePreviousResponse={handlePreviousResponse} language={language}/>
+            {/*Conditionnal rendering for suggestions */}
+
         <SpeechToTextComponent handleUserPrompt={handleUserPrompt} 
         skillLevel={skillLevelSetting}
         conversationSetting={conversationSetting} 

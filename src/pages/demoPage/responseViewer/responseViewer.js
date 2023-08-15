@@ -17,7 +17,7 @@ const ResponseViewer = (props) => {
 
   useEffect(() => {
     if (gptResponse) {
-      fetch(`https://languagechatbackend-f098582e0fd8.herokuapp.com/promptVoice/gptPromptVoice/googleSpeech?text=${encodeURIComponent(gptResponse)}&lang=${encodeURIComponent(voiceLanguage)}`)
+      fetch(`https://languagechatbackend-a20ce8427269.herokuapp.com/promptVoice/gptPromptVoice/googleSpeech?text=${encodeURIComponent(gptResponse)}&lang=${encodeURIComponent(voiceLanguage)}`)
         .then(response => response.blob())
         .then(blob => {
           audio.src = URL.createObjectURL(blob);
@@ -28,7 +28,7 @@ const ResponseViewer = (props) => {
 
   const handleOnClick = () => {
     if (gptResponse) {
-        fetch(`https://languagechatbackend-f098582e0fd8.herokuapp.com/promptVoice/gptPromptVoice/googleSpeech?text=${encodeURIComponent(gptResponse)}&lang=${encodeURIComponent(voiceLanguage)}`)
+        fetch(`https://languagechatbackend-a20ce8427269.herokuapp.com/promptVoice/gptPromptVoice/googleSpeech?text=${encodeURIComponent(gptResponse)}&lang=${encodeURIComponent(voiceLanguage)}`)
         .then(response => response.blob())
         .then(blob => {
           audio.src = URL.createObjectURL(blob);
